@@ -1,0 +1,10 @@
+﻿<Window x:Class="BrowserTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <WebBrowser x:Name="browser" Margin="10,38,10,10"/>
+        <TextBox x:Name="txtUrl" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Text="http://google.com" VerticalAlignment="Top" KeyDown="txtUrl_KeyDown"/>
+
+    </Grid>
+</Window>
