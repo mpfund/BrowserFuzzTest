@@ -4,7 +4,8 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <WebBrowser x:Name="browser" Margin="10,38,10,10"/>
-        <TextBox x:Name="txtUrl" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Text="http://google.com" VerticalAlignment="Top" KeyDown="txtUrl_KeyDown"/>
+        <TextBox x:Name="txtUrl" Height="23" Margin="10,10,88,0" TextWrapping="Wrap" Text="http://google.com" VerticalAlignment="Top" KeyDown="txtUrl_KeyDown"/>
+        <Button x:Name="btnStartFuzz" Content="Fuzz" VerticalAlignment="Top" Margin="0,10,10,0" Click="btnStartFuzz_Click" HorizontalAlignment="Right" Width="65"/>
 
     </Grid>
 </Window>

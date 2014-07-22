@@ -10,12 +10,15 @@ namespace BrowserTest
 {
     public class SimpleHttpServer
     {
+
+        public event Action Started;
+
         public static void Start(string content)
         {
             var t = new Thread(() => SimpleListenerExample(new string[] { "http://localhost:2000/" }, content));
             t.IsBackground = true;
             t.Start();
-            
+
         }
 
         // This example requires the System and System.Net namespaces. 
@@ -40,6 +43,7 @@ namespace BrowserTest
             }
             listener.Start();
             Console.WriteLine("Listening...");
+
             while (true)
             {
                 // Note: The GetContext method blocks while waiting for a request. 
@@ -52,7 +56,7 @@ namespace BrowserTest
                 response.AddHeader("Content-Type", "text/html; charset=utf-8");
                 if (request.Url.PathAndQuery.StartsWith("/test"))
                 {
-                    responseString = "<!DOCTYPE html><html><body><script>var k = '" + request.RawUrl + "';</script>mm</body></html>";
+                    responseString = "<!DOCTYPE html><html><body><script>a = alert;var k = '" + request.RawUrl + "';</script>mm " + request.RawUrl + "</body></html>";
                 }
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 // Get a response stream and write the response to it.
