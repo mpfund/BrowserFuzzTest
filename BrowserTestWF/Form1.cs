@@ -47,20 +47,31 @@ namespace BrowserTestWF
 
         private void StartFuzz()
         {
+            var x = 0;
+            var posX = 0;
+
             while (true)
             {
-                var x = this.position++;
                 var c = Encoding.ASCII.GetString(new byte[] { (byte)x });
                 var c2 = Encoding.ASCII.GetString(new byte[] { (byte)(x + 10007) });
                 var c3 = Encoding.ASCII.GetString(new byte[] { (byte)(x + 10099) });
                 var c4 = Encoding.ASCII.GetString(new byte[] { (byte)(x + 23) });
                 //c+= Encoding.ASCII.GetString(new byte[] { (byte)y });
-                var pos = ">";
-                var payload = "</script><script>a(1);</script>";
-                payload = payload.Insert(x % payload.Length, c);
-                payload = payload.Insert(payload.Length - ((x + 10007) % payload.Length), c2);
-                payload = payload.Insert(payload.Length - ((x + 10099) % payload.Length), c3);
-                payload = payload.Insert((x+23) % payload.Length, c4);
+                
+                //var payload = "</script><script>a(1);</script>";
+                var payload = "<iframe/**/src=test2>";
+                payload = payload.Insert(posX % payload.Length, c);
+                
+                if(x==255)
+                {
+                    x = 0;
+                    posX++;
+                }
+                
+                if (posX >= payload.Length)
+                    break;
+
+                x++;
 
                 var url = "http://localhost:2000/test?s=" + payload;
 
@@ -73,7 +84,10 @@ namespace BrowserTestWF
                     if (alertDialogHandler.Exists())
                         MessageBox.Show("sdf");
                 }
-                
+
+                //if(k.ToLower().Contains("<iframe"))
+                //    MessageBox.Show("sdf");
+             
             }
         }
         private int position = 0;

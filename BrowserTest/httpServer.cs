@@ -5,6 +5,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace BrowserTest
 {
@@ -44,6 +46,8 @@ namespace BrowserTest
             listener.Start();
             Console.WriteLine("Listening...");
 
+            var lastrequest = "";
+
             while (true)
             {
                 // Note: The GetContext method blocks while waiting for a request. 
@@ -57,6 +61,11 @@ namespace BrowserTest
                 if (request.Url.PathAndQuery.StartsWith("/test"))
                 {
                     responseString = "<!DOCTYPE html><html><body><script>a = alert;var k = '" + request.RawUrl + "';</script>mm " + request.RawUrl + "</body></html>";
+                    lastrequest = request.RawUrl;
+                }
+                if (request.Url.PathAndQuery.StartsWith("/test2"))
+                {
+                    MessageBox.Show("k: " + lastrequest);
                 }
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 // Get a response stream and write the response to it.
